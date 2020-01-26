@@ -1,0 +1,328 @@
+{% extends 'base.html'%}
+{% load humanize%}
+{% load static %}
+
+
+      {% block content %}
+<head>
+ <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/linericon/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/lightbox/simpleLightbox.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/nice-select/css/nice-select.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/animate-css/animate.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/popup/magnific-popup.css' %}">
+        <!-- main css -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+
+
+
+	</head>
+        <!--================Home Banner Area =================-->
+        <section class="home_banner_area">
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="banner_content text-center">
+						<h3>We Ensure better education <br />for a better world</h3>
+						<p>In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope known as the Hubble.</p>
+						<a class="main_btn" href="{% url 'index1' %}">Get Started</a>
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+
+        <!--================Finance Area =================-->
+        <section class="finance_area">
+        	<div class="container">
+        		<div class="finance_inner row">
+        			<div class="col-lg-3 col-sm-6">
+        				<div class="finance_item">
+        					<div class="media">
+        						<div class="d-flex">
+        							<i class="lnr lnr-rocket"></i>
+        						</div>
+        						<div class="media-body">
+        							<h5>Science & <br />Engineering</h5>
+        						</div>
+        					</div>
+        				</div>
+        			</div>
+        			<div class="col-lg-3 col-sm-6">
+        				<div class="finance_item">
+        					<div class="media">
+        						<div class="d-flex">
+        							<i class="lnr lnr-earth"></i>
+        						</div>
+        						<div class="media-body">
+        							<h5>Online  <br />Learning</h5>
+        						</div>
+        					</div>
+        				</div>
+        			</div>
+        			<div class="col-lg-3 col-sm-6">
+        				<div class="finance_item">
+        					<div class="media">
+        						<div class="d-flex">
+        							<i class="lnr lnr-smile"></i>
+        						</div>
+        						<div class="media-body">
+        							<h5>Learn & <br />Earn</h5>
+        						</div>
+        					</div>
+        				</div>
+        			</div>
+        			<div class="col-lg-3 col-sm-6">
+        				<div class="finance_item">
+        					<div class="media">
+        						<div class="d-flex">
+        							<i class="lnr lnr-tag"></i>
+        						</div>
+        						<div class="media-body">
+        							<h5>Top  <br />Courses</h5>
+        						</div>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Finance Area =================-->
+
+        <!--================Courses Area =================-->
+  <section class="courses_area p_120">
+         <div class="container">
+           <div class="main_title">
+             <h2>Popular Free Courses</h2>
+             <p>There is a moment in the life of any aspiring astronomer that it is time to buy that first telescope. It’s exciting to think about setting up your own viewing station.</p>
+           </div>    <div class="row">
+
+         {% if course %}
+        {% for l in course %}
+        <!-- Listing 1 -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card listing-preview">
+            <img class="card-img-top" src="{{l.image.url}}" height="300 px" width="25%" alt="">
+            <div class="card-img-overlay">
+
+
+				{% if l.Free %}
+              <a class="badge badge-secondary text-white" href=""><h6>
+                <span >Free</span>
+			  </h6></a>
+
+				{% else %}
+				<a class="badge badge-secondary text-white" href="#"> <h6>Rs. {{l.Price | intcomma }} </h6></a>
+
+				{% endif %}
+
+            </div> <div class="card-body">
+              <div class="listing-heading text-center">
+				  <a href="{% url 'course' l.id %}" ><h4 class="text-primary">{{l.title}}</h4></a>
+                </div>
+              <hr>
+              <div class="row py-2 text-secondary">
+                <div class="col-6">
+                  <a href="{% url 'course' l.id %}"><i class="lnr lnr-user"></i> {{l.instructor}}</a></div>
+                <div class="col-6">
+                   <a href="{% url 'course' l.id %}"><i class="lnr lnr-users"></i> 355</a></div>
+              </div>
+              <div class="row py-2 text-secondary">
+                <div class="col-6">
+                  <a href="{% url 'course' l.id %}"><i class="lnr lnr-bubble"></i> 35</a></li></div>
+                <div class="col-6">
+                  <a href="{% url 'course' l.id %}"><i class="fas fa-clock"></i> {{l.published_date|timesince }}</a></div>
+              </div>
+
+                <a href="{% url 'course' l.id %}" class="btn btn-primary btn-block">More Info</a>
+            </div>
+          </div>
+        </div>
+
+
+
+        {% endfor %}
+
+
+
+        {% else %}
+        <h1>No Listing Available</h1>
+        {% endif %}
+</section>
+
+        <!--================Team Area =================-->
+        <section class="team_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Meet Our Faculty</h2>
+        			<p>There is a moment in the life of any aspiring astronomer that it is time to buy that first telescope. It’s exciting to think about setting up your own viewing station.</p>
+        		</div>
+
+
+        		<div class="row team_inner">
+        		{% for t in team %}
+        			<div class="col-lg-3 col-sm-6">
+        				<div class="team_item">
+        					<div class="team_img">
+        						<img class="rounded-circle" src="{{t.image.url}}" alt="">
+        						<div class="hover">
+        							<a href="{{t.fb_id}}"><i class="fa fa-facebook"></i></a>
+        							<a href="{{t.twiter_id}}"><i class="fa fa-twitter"></i></a>
+        							<a href={{t.linkden_id}}><i class="fa fa-linkedin"></i></a>
+        						</div>
+        					</div>
+        					<div class="team_name">
+        						<h4>{{t.name}}</h4>
+        						<p>{{t.position}}</p>
+        					</div>
+        				</div>
+        			</div>
+{% endfor %}
+				</div>
+
+
+
+        </section>
+        <!--================End Team Area =================-->
+
+
+
+        <!--================End Team Area =================-->
+
+        <!--================Testimonials Area =================-->
+        <section class="testimonials_area p_120">
+
+			<div class="container">
+
+        		<div class="testi_slider owl-carousel">
+{% for t in test %}
+        			<div class="item">
+
+        				<div class="testi_item">
+							<img src="{{t.image.url}}" height="150px"  alt="">
+       						<h4>{{t.name}}</h4>
+       						<ul class="list">
+       							<li><a href="#"><i class="fa fa-star"></i></a></li>
+       							<li><a href="#"><i class="fa fa-star"></i></a></li>
+       							<li><a href="#"><i class="fa fa-star"></i></a></li>
+       							<li><a href="#"><i class="fa fa-star"></i></a></li>
+       							<li><a href="#"><i class="fa fa-star"></i></a></li>
+       						</ul>
+       						<p>{{t.comment}}</p>
+        				</div>
+        			</div>
+{% endfor %}
+        		</div>
+
+			</div>
+        </section>
+        <!--================End Testimonials Area =================-->
+
+        <!--================Pagkages Area =================-->
+        <section class="packages_area p_120">
+        	<div class="container">
+        		<div class="row packages_inner">
+        			<div class="col-lg-4">
+        				<div class="packages_text">
+        					<h3>Choose <br />Course Packages</h3>
+        					<p>There is a moment in the life of any aspiring astronomer that it is time to buy that first telescope. It’s exciting to think about setting up your own viewing station.</p>
+        				</div>
+        			</div>
+        			<div class="col-lg-4">
+        				<div class="packages_item">
+        					<div class="pack_head">
+        						<i class="lnr lnr-graduation-hat"></i>
+        						<h3>Premium</h3>
+        						<p>For the individuals</p>
+        					</div>
+        					<div class="pack_body">
+        						<ul class="list">
+        							<li><a href="#">Secure Online Transfer</a></li>
+        							<li><a href="#">Unlimited Styles for interface</a></li>
+        							<li><a href="#">Reliable Customer Service</a></li>
+        						</ul>
+        					</div>
+        					<div class="pack_footer">
+        						<h4>£399.00</h4>
+        						<a class="main_btn" href="{% url 'index1' %}">Join Now</a>
+        					</div>
+        				</div>
+        			</div>
+        			<div class="col-lg-4">
+        				<div class="packages_item">
+        					<div class="pack_head">
+        						<i class="lnr lnr-diamond"></i>
+        						<h3>Exclusive</h3>
+        						<p>For the individuals</p>
+        					</div>
+        					<div class="pack_body">
+        						<ul class="list">
+        							<li><a href="#">Secure Online Transfer</a></li>
+        							<li><a href="#">Unlimited Styles for interface</a></li>
+        							<li><a href="#">Reliable Customer Service</a></li>
+        						</ul>
+        					</div>
+        					<div class="pack_footer">
+        						<h4>£399.00</h4>
+        						<a class="main_btn" href="{% url 'index1' %}">Join Now</a>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Pagkages Area =================-->
+
+        <!--================Latest Blog Area =================-->
+        <section class="latest_blog_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Latest Posts From Blog</h2>
+        			<p>There is a moment in the life of any aspiring astronomer that it is time to buy that first telescope. It’s exciting to think about setting up your own viewing station.</p>
+        		</div>
+        		<div class="row latest_blog_inner">
+					{% if he %}
+        		        {% for h in he %}
+        			<div class="col-lg-3 col-md-6">
+        				<div class="l_blog_item">
+        					<img class="img-fluid" src="{{h.image.url}}" alt="">
+        					<a class="date" href="#">{{h.published_date}}  | By {{h.author}}</a>
+        					<a href=""><h4>{{h.title}}</h4></a>
+        					<p>{{h.about_short}}</p>
+        				</div>
+        			</div>
+                    {% endfor %}
+
+					{% else %}
+					<h2> There is No Such Blog Exists </h2>
+					<h1>Plesae Try Another </h1>
+
+       		</div>
+        	</div>
+
+			{% endif %}
+        </section>
+        <!--================End Latest Blog Area =================-->
+
+        <!--================Impress Area =================-->
+        <section class="impress_area p_120">
+        	<div class="container">
+        		<div class="impress_inner text-center">
+					<h2>Become an instructor</h2>
+					<p>There is a moment in the life of any aspiring astronomer that it is time to buy that first telescope. It’s exciting to think about setting up your own viewing station whether that is on the deck</p>
+					<a class="main_btn2" href="{% url 'jobform' %}">Apply for the post</a>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Impress Area =================-->
+
+
+
+
+  </section></body></html>
+{% endblock  %}
+

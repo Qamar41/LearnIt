@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+{%  block content %}
+        <!--================Home Banner Area =================-->
+        <section class="banner_area">
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>About Us</h2>
+						<div class="page_link">
+							<a href="{% url 'index' %}">Home</a>
+							<a href="aboutus">About Us</a>
+						</div>
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+
+        <!--================About Area =================-->
+        <section class="about_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Goals to Achieve for the leadership</h2>
+        			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+        		</div>
+        		<div class="row about_inner">
+        			<div class="col-lg-6">
+						<div class="accordion" id="accordionExample">
+							{% for a in ab %}
+							<div class="card">
+								<div class="card-header" id="headingOne">
+									<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									Success
+									<i class="lnr lnr-chevron-down"></i>
+									<i class="lnr lnr-chevron-up"></i>
+									</button>
+								</div>
+
+								<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+									<div class="card-body">
+									{{a.success}}
+									</div>
+								</div>
+							</div>
+
+							<div class="card">
+								<div class="card-header" id="headingTwo">
+									<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+									Info
+									<i class="lnr lnr-chevron-down"></i>
+									<i class="lnr lnr-chevron-up"></i>
+									</button>
+								</div>
+								<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+									<div class="card-body">
+									{{a.info}}</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingThree">
+									<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+									Danger
+									<i class="lnr lnr-chevron-down"></i>
+									<i class="lnr lnr-chevron-up"></i>
+									</button>
+								</div>
+								<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+									<div class="card-body">
+									{{a.danger}}</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingfour">
+									<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
+									Warning
+									<i class="lnr lnr-chevron-down"></i>
+									<i class="lnr lnr-chevron-up"></i>
+									</button>
+								</div>
+								<div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
+									<div class="card-body">
+									{{a.warning}}</div>
+								</div>
+							</div>
+						</div>
+        			</div>
+        			<div class="col-lg-6">
+        				<div class="video_area" id="video">
+						<video width="500px" height="280px" controls> <source src="{{a.video.url}}" type="video/mp4"> </video>
+						</div>
+        			</div>
+
+        		</div>
+        		<div class="about_details">
+        			<p>{{a.detail}}</p>
+        		</div>
+				{% endfor %}
+        	</div>
+        </section>
+        <!--================End About Area =================-->
+
+        <!--================Team Area =================-->
+        <section class="team_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Meet Our Faculty</h2>
+        			<p>There is a moment in the life of any aspiring astronomer that it is time to buy that first telescope. It’s exciting to think about setting up your own viewing station.</p>
+        		</div>
+
+
+        		<div class="row team_inner">
+        		{% for t in team %}
+        			<div class="col-lg-3 col-sm-6">
+        				<div class="team_item">
+        					<div class="team_img">
+        						<img class="rounded-circle" src="{{t.image.url}}" alt="">
+        						<div class="hover">
+        							<a href="{{t.fb_id}}"><i class="fa fa-facebook"></i></a>
+        							<a href="{{t.twiter_id}}"><i class="fa fa-twitter"></i></a>
+        							<a href={{t.linkden_id}}><i class="fa fa-linkedin"></i></a>
+        						</div>
+        					</div>
+        					<div class="team_name">
+        						<h4>{{t.name}}</h4>
+        						<p>{{t.position}}</p>
+        					</div>
+        				</div>
+        			</div>
+{% endfor %}
+				</div>
+
+
+
+        </section>
+        <!--================End Team Area =================-->
+
+        <!--================Testimonials Area =================-->
+        <section class="testimonials_area p_120">
+
+			<div class="container">
+
+        		<div class="testi_slider owl-carousel">
+{% for t in test %}
+        			<div class="item">
+
+        				<div class="testi_item">
+							<img src="{{t.image.url}}" alt="">
+       						<h4>{{t.name}}</h4>
+       						<ul class="list">
+       							<li><a href="#"><i class="fa fa-star"></i></a></li>
+       							<li><a href="#"><i class="fa fa-star"></i></a></li>
+       							<li><a href="#"><i class="fa fa-star"></i></a></li>
+       							<li><a href="#"><i class="fa fa-star"></i></a></li>
+       							<li><a href="#"><i class="fa fa-star"></i></a></li>
+       						</ul>
+       						<p>{{t.comment}}</p>
+        				</div>
+        			</div>
+{% endfor %}
+        		</div>
+
+			</div>
+        </section>
+        <!--================End Testimonials Area =================-->
+
+
+        <!--================Impress Area =================-->
+        <section class="impress_area p_120">
+        	<div class="container">
+        		<div class="impress_inner text-center">
+					<h2>Become an instructor</h2>
+					<p>There is a moment in the life of any aspiring astronomer that it is time to buy that first telescope. It’s exciting to think about setting up your own viewing station whether that is on the deck</p>
+					<a class="main_btn2" href="#">Apply for the post</a>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Impress Area =================-->
+{% endblock %}

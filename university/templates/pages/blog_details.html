@@ -1,0 +1,48 @@
+{% extends 'base.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{%  block content %}
+
+
+
+
+  <!--================Home Banner Area =================-->
+        <section class="banner_area">
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>{{blo.title}}</h2>
+						<div class="page_link">
+							<a href="{% url 'index' %}">Home</a>
+							<a href="aboutus">  Blog</a>
+						</div>
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+
+
+
+{% if blo %}
+<p>  {{blo.title}}</p>
+
+<img height="150" width="50"  align="right" src="{{blo.image.url}}">
+<p>  {{blo.author}}</p>
+<p>  {{blo.published_date}}</p>
+<p> {{blo.about_short}}</p>
+<p> {{blo.about_detail}}</p>
+
+
+{% endif %}
+
+
+{% endblock %}
+</body>
+</html>

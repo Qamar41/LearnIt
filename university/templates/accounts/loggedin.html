@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+
+{%  block content %}
+ <!--================Home Banner Area =================-->
+        <section class="banner_area">
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>My Dashboard</h2>
+						<div class="page_link">
+							<a href="{% url 'index' %}">Home</a>
+							<a href="dashboard">Dahboard</a>
+						</div>
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+
+
+
+<h1>Love you {{ user.username }} </h1>
+
+
+<h1>Hi {{ user.username }}</h1></body>
+
+
+<a href="{% url 'logout' %}">Logout</a>
+
+{% endblock %}
+</html>

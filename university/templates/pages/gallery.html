@@ -1,0 +1,20 @@
+{% for t in team %}
+        		<div class="row team_inner">
+        			<div class="col-lg-3 col-sm-6">
+        				<div class="team_item">
+        					<div class="team_img">
+        						<img class="rounded-circle" src="{{t.image.url}}" alt="">
+        						<div class="hover">
+        							<a href="{{t.fb_id}}"><i class="fa fa-facebook"></i></a>
+        							<a href="#"><i class="fa fa-twitter"></i></a>
+        							<a href="#"><i class="fa fa-linkedin"></i></a>
+        						</div>
+        					</div>
+        					<div class="team_name">
+        						<h4>{{t.name}}</h4>
+        						<p>{{t.position}}</p>
+        					</div>
+        				</div>
+        			</div>
+				</div>
+					{% endfor %}

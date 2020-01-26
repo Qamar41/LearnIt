@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+        <!--================Home Banner Area =================-->
+        <section class="banner_area">
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>Courses</h2>
+						<div class="page_link">
+							<a href="/">Home</a>
+							<a href="courses">Courses</a>
+						</div>
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+
+        <!--================Courses Area =================-->
+  <section class="courses_area p_120">
+         <div class="container">
+           <div class="main_title">
+             <h2>Popular  Courses</h2>
+             <p>There is a moment in the life of any aspiring astronomer that it is time to buy that first telescope. It’s exciting to think about setting up your own viewing station.</p>
+           </div>    <div class="row">
+
+         {% if course %}
+        {% for l in course %}
+        <!-- Listing 1 -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card listing-preview">
+            <img class="card-img-top" src="{{l.image.url}}" height="300 px" width="25%" alt="">
+            <div class="card-img-overlay">
+
+
+				{% if l.Free %}
+              <a class="badge badge-secondary text-white" href=""><h6>
+                <span >Free</span>
+			  </h6></a>
+
+				{% else %}
+				<a class="badge badge-secondary text-white" href="#"> <h6>Rs. {{l.Price | intcomma }} </h6></a>
+
+				{% endif %}
+
+            </div> <div class="card-body">
+              <div class="listing-heading text-center">
+				  <a href="" ><h4 class="text-primary">{{l.title}}</h4></a>
+                </div>
+              <hr>
+              <div class="row py-2 text-secondary">
+                <div class="col-6">
+                  <a href="#"><i class="lnr lnr-user"></i> {{l.instructor}}</a></div>
+                <div class="col-6">
+                   <a href=""><i class="lnr lnr-users"></i> 355</a></div>
+              </div>
+              <div class="row py-2 text-secondary">
+                <div class="col-6">
+                  <a href=""><i class="lnr lnr-bubble"></i> 35</a></li></div>
+                <div class="col-6">
+                  <a href=""><i class="fas fa-clock"></i> {{l.published_date|timesince }}</a></div>
+              </div>
+
+                <a href="{% url 'course' l.id %}" class="btn btn-primary btn-block">More Info</a>
+            </div>
+          </div>
+        </div>
+
+
+
+        {% endfor %}
+
+
+
+        {% else %}
+        <h1>No Listing Available</h1>
+        {% endif %}
+		 </div>
+			 </section>
+
+
+        <!--================Pagkages Area =================-->
+        <section class="packages_area p_120">
+        	<div class="container">
+        		<div class="row packages_inner">
+        			<div class="col-lg-4">
+        				<div class="packages_text">
+        					<h3>Choose <br />Course Packages</h3>
+        					<p>There is a moment in the life of any aspiring astronomer that it is time to buy that first telescope. It’s exciting to think about setting up your own viewing station.</p>
+        				</div>
+        			</div>
+        			<div class="col-lg-4">
+        				<div class="packages_item">
+        					<div class="pack_head">
+        						<i class="lnr lnr-graduation-hat"></i>
+        						<h3>Premium</h3>
+        						<p>For the individuals</p>
+        					</div>
+        					<div class="pack_body">
+        						<ul class="list">
+        							<li><a href="#">Secure Online Transfer</a></li>
+        							<li><a href="#">Unlimited Styles for interface</a></li>
+        							<li><a href="#">Reliable Customer Service</a></li>
+        						</ul>
+        					</div>
+        					<div class="pack_footer">
+        						<h4>£399.00</h4>
+        						<a class="main_btn" href="{% url 'index1' %}">Join Now</a>
+        					</div>
+        				</div>
+        			</div>
+        			<div class="col-lg-4">
+        				<div class="packages_item">
+        					<div class="pack_head">
+        						<i class="lnr lnr-diamond"></i>
+        						<h3>Exclusive</h3>
+        						<p>For the individuals</p>
+        					</div>
+        					<div class="pack_body">
+        						<ul class="list">
+        							<li><a href="#">Secure Online Transfer</a></li>
+        							<li><a href="#">Unlimited Styles for interface</a></li>
+        							<li><a href="#">Reliable Customer Service</a></li>
+        						</ul>
+        					</div>
+        					<div class="pack_footer">
+        						<h4>£399.00</h4>
+        						<a class="main_btn" href="{% url 'index1' %}">Join Now</a>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Pagkages Area =================-->
+
+{% endblock %}
