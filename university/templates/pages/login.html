@@ -59,7 +59,9 @@
 						<span class="label-input100" >Password </span>
 
 					</div>
-
+					{% if request.GET.next %}
+					<input type="hidden"  name="next" value="{{request.GET.next}}">
+				{% endif %}
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Sign in

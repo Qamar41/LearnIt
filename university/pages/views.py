@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect,Http404
 from .models import faculty,testimonial,about,blog,contact,jobform,home_course,Comment
 from .forms import ModelForm,contactform,CommentForm
+from accounts.views import login_view
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 from django.contrib import messages
 import datetime
@@ -21,19 +23,24 @@ def index(request):
 
 
 
-
+@login_required(login_url='accounts/h')
 def course(request,coursee_id):
     try:
+        # next = request.GET.get('next')
+
         qa=home_course.objects.get(id=coursee_id)
+        comment=Comment.objects.all().filter(post=coursee_id)
 
 
         context={
-              "qa" :qa,
-            # 'comments': comments,
-            # 'new_comment': new_comment,
-            # 'comment_form': comment_form
+                  "qa" :qa,
+                'comment': comment,
+                # 'new_comment': new_comment,
+                # 'comment_form': comment_form
 
-        }
+            }
+        # if next:
+        #     return redirect(next)
         return render(request, 'pages/course_details.html',context)
     except home_course.DoesNotExist:
         raise Http404("List Doe's Not Exist ")

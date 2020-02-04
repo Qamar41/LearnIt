@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import datetime
 # Create your models here.
-
+from django.contrib .auth.models import User
 # Team Members
 class faculty (models.Model):
     name=models.CharField(max_length=64)
@@ -99,7 +99,7 @@ class home_course(models.Model):
     image=models.ImageField(upload_to='courses/%Y/%m/%d')
     Free=models.BooleanField()
     instructor=models.CharField(max_length=64)
-    Price=models.IntegerField(blank=True,default=False)
+    Price=models.IntegerField(blank=True,default=0)
     published_date=models.DateTimeField(datetime.now,default=datetime.now)
     Seats=models.IntegerField(default=12)
     course_outline=models.CharField(max_length=500,default=None,blank=True)
@@ -113,7 +113,7 @@ class home_course(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(home_course,on_delete=models.CASCADE,related_name='comments')
-    name = models.CharField(max_length=80)
+    name = models.ForeignKey(User,on_delete=models.CASCADE)
     email = models.EmailField()
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)

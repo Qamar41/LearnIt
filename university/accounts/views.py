@@ -24,7 +24,10 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("index")
+            if 'next' in request.POST:
+                return redirect(request.POST.get('next'))
+            else:
+                return redirect("index")
         else:
             messages.error(request,'Invalid Credentials ')
             return render(request, "pages/login.html")
