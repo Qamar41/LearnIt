@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,Http404
+from django.shortcuts import render,redirect,Http404,HttpResponseRedirect,get_object_or_404
 from .models import faculty,testimonial,about,blog,contact,jobform,home_course,Comment
 from .forms import ModelForm,contactform,CommentForm
 from accounts.views import login_view
@@ -6,16 +6,24 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 from django.contrib import messages
 import datetime
+
+
+
+
 def index(request):
     team = faculty.objects.all()
     test=testimonial.objects.all()
     course=home_course.objects.order_by('-published_date')[:3]
+
+
+
     he = blog.objects.order_by('-published_date').filter(is_published=True)[:4]
     context = {
         'team': team,
         'test':test,
         'he':he,
-        'course' : course
+        'course' : course,
+        # 'comment':comment
     }
 
     return render(request,'pages/index.html',context)
@@ -26,17 +34,25 @@ def index(request):
 @login_required(login_url='accounts/h')
 def course(request,coursee_id):
     try:
-        # next = request.GET.get('next')
 
-        qa=home_course.objects.get(id=coursee_id)
-        comment=Comment.objects.all().filter(post=coursee_id)
-
+        post=get_object_or_404(home_course,id=coursee_id)
+        # qa=home_course.objects.get(id=coursee_id)
+        comment=Comment.objects.all().filter(post=coursee_id).order_by('-id')
+        if request.method =='POST':
+            comment_form=CommentForm(request.POST or None)
+            if comment_form.is_valid():
+                content=request.POST.get('content')
+                comments=Comment.objects.create(post=coursee_id,user=request.user,content=content)
+                comments.save()
+                return HttpResponseRedirect(coursee_id.get_absolute_url())
+        else:
+                comment_form=CommentForm
 
         context={
-                  "qa" :qa,
+                  "qa" :post,
                 'comment': comment,
                 # 'new_comment': new_comment,
-                # 'comment_form': comment_form
+                'comment_form': comment_form
 
             }
         # if next:
@@ -44,6 +60,16 @@ def course(request,coursee_id):
         return render(request, 'pages/course_details.html',context)
     except home_course.DoesNotExist:
         raise Http404("List Doe's Not Exist ")
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -128,8 +154,15 @@ def jobforme(request):
 
 
 def courses(request):
+
     course = home_course.objects.order_by('-published_date')
+
     context={
-        'course':course
+        'course':course,
+        #
+        # 'comment': comments
+
     }
     return render(request,'pages/course.html',context)
+
+

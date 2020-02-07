@@ -13,23 +13,28 @@
 						<div class="page_link">
 							<a href="/">Home</a>
 							<a href="courses">Courses</a>
+
 						</div>
 					</div>
 				</div>
             </div>
         </section>
+
         <!--================End Home Banner Area =================-->
 
         <!--================Courses Area =================-->
+
+
   <section class="courses_area p_120">
          <div class="container">
            <div class="main_title">
              <h2>Popular  Courses</h2>
+			   <h2 class="helloo"> Available Courses : {{course.count}}</h2>
              <p>There is a moment in the life of any aspiring astronomer that it is time to buy that first telescope. It’s exciting to think about setting up your own viewing station.</p>
            </div>    <div class="row">
-
          {% if course %}
-        {% for l in course %}
+
+			 {% for l in course %}
         <!-- Listing 1 -->
         <div class="col-md-6 col-lg-4 mb-4">
           <div class="card listing-preview">
@@ -60,7 +65,7 @@
               </div>
               <div class="row py-2 text-secondary">
                 <div class="col-6">
-                  <a href=""><i class="lnr lnr-bubble"></i> 35</a></li></div>
+                  <a href=""><i class="lnr lnr-bubble"></i> {{comment.count}}</a></li></div>
                 <div class="col-6">
                   <a href=""><i class="fas fa-clock"></i> {{l.published_date|timesince }}</a></div>
               </div>
