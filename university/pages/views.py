@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,Http404,HttpResponseRedirect,get_object_or_404
+from django.shortcuts import render,redirect,Http404,HttpResponseRedirect,get_object_or_404,HttpResponse
 from .models import faculty,testimonial,about,blog,contact,jobform,home_course,Comment
 from .forms import ModelForm,contactform,CommentForm
 from accounts.views import login_view
@@ -31,7 +31,7 @@ def index(request):
 
 
 
-@login_required(login_url='accounts/h')
+# @login_required(login_url='accounts/h')
 def course(request,coursee_id):
     try:
 
@@ -166,3 +166,7 @@ def courses(request):
     return render(request,'pages/course.html',context)
 
 
+
+@login_required(login_url='accounts/h')
+def enrollment(request):
+    return render(request,'cart/cart.html')

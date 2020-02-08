@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'django.contrib.sites',
     'django.contrib.humanize',
+    'enrollments',
 
     # all auth apps
 

@@ -63,13 +63,24 @@
 							</div>
 							<div class="tab-pane fade show active" id="comments" role="tabpanel" aria-labelledby="comments-tab">
 
-						</div></div>
-				</div>
+
+								<div class="comments-area">
+														<div class="comment-list">
 <!--					fb comment -->
 
 
 
+
 					<div class="fb-comments" data-href="http://localhost:8000/{{qa.id}}" data-width="" data-numposts="5"></div>
+
+														</div></div>
+
+
+						</div></div>
+
+
+				</div>
+
 
 
         			<div class="col-lg-4">
@@ -85,7 +96,7 @@
         						<li><a href="#">Schedule <span>2.00 pm to 4.00 pm</span></a></li>
         						<li><a href="#" >Published Date <span>{{qa.published_date}}</span></a></li>
         					</ul>
-        					<a class="main_btn" href="#">Enroll the Course</a>
+        					<a class="main_btn" href="{% url 'enroll' %}">Enroll the Course</a>
         				</div>
         			</div>
         		</div>
