@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+	.class{
+	align='center';
+	padding-left:'150px'
+	}
+
+
+
+</style>
+</head>
+<body>
+
+
+
+{% if data %}
+{% for d in data %}
+<h2>{{d.video_No}}- <a href="{{d.video.url}}">{{d.title}} </a></h2>
+<div class="col-lg-6">  <div class="hello">
+        				<div class="video_area" id="video">
+						<video width="500px" height="280px" controls> <source src="{{d.video.url}}" type="video/mp4"> </video>
+						</div>
+        			</div>
+
+        		</div>
+
+
+{% endfor %}
+{% else %}
+
+<h2>No videos</h2>
+
+{% endif %}
+
+
+
+</body>
+</html>

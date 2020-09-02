@@ -30,6 +30,7 @@
         		<div class="row course_details_inner">
         			<div class="col-lg-8">
         				<div class="c_details_img">
+							{% include '_alert.html' %}
         					<img class="img-fluid" src="{{qa.image.url}}" alt="">
         				</div>
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -96,11 +97,68 @@
         						<li><a href="#">Schedule <span>2.00 pm to 4.00 pm</span></a></li>
         						<li><a href="#" >Published Date <span>{{qa.published_date}}</span></a></li>
         					</ul>
-        					<a class="main_btn" href="{% url 'enroll' %}">Enroll the Course</a>
-        				</div>
+
+<!--        					<a class="main_btn" href="{% url 'enroll' %}">Enroll the Course</a>-->
+
+
+
+        					<a class="main_btn" {% if user.is_authenticated %} and   data-toggle="modal" data-target="#inquiryModal" {% endif %} href="{% url 'index1' %}">Enroll the Course</a>
+			</div>
         			</div>
         		</div>
         	</div>
         </section>
+
+<div class="modal fade" id="inquiryModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="inquiryModalLabel">Enrolling To The Course </h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="{% url 'enroll' %}">
+			  {% csrf_token %}
+			   {% if user.is_authenticated %}
+			  <input type="hidden"  name="user_id" value="{{user.id}}">
+			  {% else %}
+			  <input type="hidden"  name="user_id" value="0">
+			  {% endif %}
+			  <input type="hidden" name="course_id" value="{{qa.id}}">
+            <div class="form-group">
+              <label for="property_name" class="col-form-label">Course:</label>
+              <input type="text" name="listing" class="form-control" value="{{qa.title}}" >
+            </div>
+
+            <div class="form-group">
+              <label for="name" class="col-form-label">Name:</label>
+              <input type="text" name="name" class="form-control" {% if user.is_authenticated %}  value="{{user.first_name}} {{user.last_name}}"  {% endif %}required>
+            </div>
+            <div class="form-group">
+              <label for="email" class="col-form-label">Email:</label>
+              <input type="email" name="email" class="form-control"  {% if user.is_authenticated %}  value="{{user.email}}"  {% endif %}required>
+            </div>
+            <div class="form-group">
+              <label for="phone" class="col-form-label">Phone:</label>
+              <input type="text" name="phone" class="form-control">
+            </div>
+			  <div class="checkbox">
+						<label>
+							<input type="checkbox" required> I accept the Terms of Use & Privacy Policy.
+							<span class="checkmark"></span>
+						</label>
+
+            <hr>
+            <input type="submit" value="Send" class="btn btn-block btn-secondary">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
         <!--================End Course Details Area =================-->
 {% endblock %}

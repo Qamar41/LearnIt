@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block content %}
+
+
+
+
+
+<div  style="background-image:url('{% static 'img/blog/main-blog/m-blog-2.jpg' %}'); background-size:cover; padding-top:5px">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="inquiryModalLabel">Enrolling To The Course </h5>
+
+        </div>
+        <div class="modal-body">
+          <form method="post">
+			  {% csrf_token %}
+			   {% if user.is_authenticated %}
+			  <input type="hidden"  name="user_id" value="{{user.id}}">
+			  {% else %}
+			  <input type="hidden"  name="user_id" value="0">
+			  {% endif %}
+
+            <div class="form-group">
+              <label for="property_name" class="col-form-label">Course:</label>
+
+              <input type="text" name="listing" class="form-control" value="{{.title}}" disabled>
+
+            </div>
+
+            <div class="form-group">
+              <label for="name" class="col-form-label">Name:</label>
+              <input type="text" name="name" class="form-control" {% if user.is_authenticated %}  value="{{user.first_name}} {{user.last_name}}" disabled {% endif %}required>
+            </div>
+            <div class="form-group">
+              <label for="email" class="col-form-label">Email:</label>
+              <input type="email" name="email" class="form-control"  {% if user.is_authenticated %}  value="{{user.email}}" disabled {% endif %}required>
+            </div>
+            <div class="form-group">
+              <label for="phone" class="col-form-label">Phone:</label>
+              <input type="text" name="phone" class="form-control">
+            </div>
+			  <div class="checkbox">
+						<label>
+							<input type="checkbox" required> I accept the Terms of Use & Privacy Policy.
+							<span class="checkmark"></span>
+						</label>
+
+            <hr>
+            <input type="submit" value="Send" class="btn btn-block btn-secondary">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

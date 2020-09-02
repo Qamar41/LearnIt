@@ -2,6 +2,8 @@ from django.db import models
 from datetime import datetime
 # Create your models here.
 from django.contrib .auth.models import User
+
+
 # Team Members
 class faculty (models.Model):
     name=models.CharField(max_length=64)
@@ -32,7 +34,7 @@ class testimonial(models.Model):
         return self.name
 
 
-
+# about page
 
 
 class about(models.Model):
@@ -73,6 +75,9 @@ class contact(models.Model):
     def __str__(self):
         return self.name
 
+# for joining our team
+
+
 class jobform(models.Model):
     name=models.CharField(max_length=64)
     email=models.EmailField()
@@ -94,6 +99,7 @@ class usercreation(models.Model):
     def __str__(self):
         return self.email
 
+# all courses
 class home_course(models.Model):
     title=models.CharField(max_length=200)
     image=models.ImageField(upload_to='courses/%Y/%m/%d')
@@ -108,6 +114,26 @@ class home_course(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# for lectures of courses
+
+class Lecture(models.Model):
+    course=models.ForeignKey(home_course,on_delete=models.CASCADE)
+    video_No=models.IntegerField()
+    title=models.CharField(max_length=150)
+    video=models.FileField(upload_to='course/videos')
+
+    def __str__(self):
+        return self.title
+
+    def delete(self, *args,**kwargs):
+        self.pdf.delete()
+        self.cover.delete()
+        super().delete(*args,**kwargs)
+
+
+
 
 
 

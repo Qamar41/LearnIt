@@ -39,9 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pages',
     'accounts',
+    'enrolls',
+    'cart',
     'django.contrib.sites',
     'django.contrib.humanize',
-    'enrollments',
+    'Enrollment',
+
+
 
     # all auth apps
 
@@ -54,8 +58,11 @@ INSTALLED_APPS = [
 
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
-
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 THIRD_PARTY_APPS =[
 
 

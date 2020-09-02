@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load crispy_forms_tags %}
+	<meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'signup/css/style.css' %}">
+    <style>
+        h1{color: green;
+        padding: 50px;
+        text-align:center;
+        font-size: 80px;
+
+        }
+        .cent{
+        padding-left: 400px;
+<!--        padding-top:px;-->
+<!--		background:black;-->
+        }
+<!--        body{-->
+<!--        background-image:url('{% static 'img/blog/main-blog/m-blog-4.jpg' %}');-->
+<!--        background-size:cover;-->
+<!--        }-->
+<!--        form{-->
+<!--        background:transparent;-->
+<!--        }-->
+<!--        form input{-->
+<!--        color:yellow;-->
+<!--        }-->
+<!--        form label {-->
+<!--        color:red;-->
+<!--        }-->
+
+
+
+    </style>
+</head>
+
+
+<h1 >Welcome {{ user.username }} </h1>
+<div class="cent">
+<!--<form method="post" action="{% url 'edit' %}">-->
+<!--	{% csrf_token %}-->
+
+<!--<div class="form-group">-->
+<!--						<div class="form-wrapper">-->
+<!--							<label for="">First Name</label>-->
+<!--							<input type="text" class="form-control" name="first_name" required value="{{ user.first_name }}" >-->
+<!--						</div>-->
+<!--						<div class="form-wrapper">-->
+<!--							<label for="">Last Name</label>-->
+<!--							<input type="text" class="form-control" name="last_name" required value="{{ user.last_name }}" >-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="form-group">-->
+
+<!--							<label for="">Username</label>-->
+<!--							<input type="text" class="form-control" name="username" required value="{{ user.username }}" disabled>-->
+<!--						</div>-->
+<!--					<div class="form-wrapper">-->
+<!--						<label for="">Email</label>-->
+<!--						<input type="text" class="form-control" name="email" required value="{{ user.email }}" >-->
+<!--					</div>-->
+
+<!--				<div class="form-wrapper">-->
+<!--						<label for="">Password :</label>-->
+<!--						<input type="text" class="form-control" name="password" required value="{{ user.password }}" disabled>-->
+<!--					<p style="color:red">password Encrypted , You are Secure </p>-->
+<!--					</div>-->
+	<form method="POST"  action="{% url 'update' %}">
+		{% csrf_token %}
+<!--<div class="form-wrapper">-->
+
+<!--						<div class="form-wrapper">-->
+<!--							<label for="">First Name</label>-->
+<!--		{{form.first_name}}-->
+<!--						</div>-->
+
+
+
+<!--							<div class="form-wrapper">-->
+<!--							<label for="">Last Name</label>-->
+<!--							{{form.last_name}}-->
+<!--						</div>-->
+
+
+<!--&lt;!&ndash;		{{form.username}}&ndash;&gt;-->
+<!--		<div class="form-wrapper">-->
+<!--						<label for="">Email</label>-->
+<!--						{{form.email}}-->
+<!--					</div>-->
+<!--	-->
+<!--</div>-->
+
+<!--
+
+<!--&lt;!&ndash;<a href="/edit/{{user.id}}">Edit</a>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+
+<!--{{form.as_p}}-->
+
+
+
+		<div class="form-wrapper">
+
+		<div class="form-wrapper">
+						<label for="">First Name</label>
+		{{form.first_name}}
+						</div>
+
+							<div class="form-wrapper">
+							<label for="">Last Name</label>
+							{{form.last_name}}
+						</div>
+
+
+
+	<div class="form-wrapper">
+						<label for="">Email</label>
+					{{form.email}}		</div>
+</div>
+		<h1>{{user_form.as_p}}</h1>
+		<h1>{{profile_form.as_p}}</h1>
+
+
+
+		<form method="post">
+		{% csrf_token %}
+		{{ user_form.as_p }}
+		{{ profile_form.as_p }}
+<!--		<button type="submit">Save changes</button>-->
+	</form>
+  <button value="">Update Info </button>
+	</form>
+	</div>
+</body>
+</html>

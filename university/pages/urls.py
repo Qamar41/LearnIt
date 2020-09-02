@@ -15,7 +15,12 @@ urlpatterns=[
     path('jobform',views.jobforme , name='jobform'),
     path('<int:coursee_id>',views.course , name='course'),
     path('courses',views.courses , name='courses'),
-    path('enroll',views.enrollment , name='enroll'),
+
+    # for lecture handling urls
+
+    path('lectures/<id>/',views.lectures , name='lectures'),
+
+
 
 
 ]

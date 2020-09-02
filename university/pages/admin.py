@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import faculty,testimonial,about,blog,contact,jobform,home_course,Comment
+from .models import faculty,testimonial,about,blog,contact,jobform,home_course,Comment,Lecture
 # Register your models here.
 class facultyadmin(admin.ModelAdmin):
     list_display = ('name','position','fb_id','twiter_id','linkden_id','image')
@@ -60,5 +60,6 @@ admin.site.register(contact,contactadmin)
 admin.site.register(jobform,jobformadmin)
 admin.site.register(home_course,home_courseadmin)
 admin.site.register(Comment,CommentAdmin)
+admin.site.register(Lecture)
 
 

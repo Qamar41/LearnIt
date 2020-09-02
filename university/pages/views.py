@@ -1,10 +1,12 @@
 from django.shortcuts import render,redirect,Http404,HttpResponseRedirect,get_object_or_404,HttpResponse
-from .models import faculty,testimonial,about,blog,contact,jobform,home_course,Comment
+from .models import faculty,testimonial,about,blog,contact,jobform,home_course,Comment,Lecture
 from .forms import ModelForm,contactform,CommentForm
+from accounts.forms import vacancyForm
 from accounts.views import login_view
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 from django.contrib import messages
+from django.contrib .auth.models import User
 import datetime
 
 
@@ -37,22 +39,13 @@ def course(request,coursee_id):
 
         post=get_object_or_404(home_course,id=coursee_id)
         # qa=home_course.objects.get(id=coursee_id)
-        comment=Comment.objects.all().filter(post=coursee_id).order_by('-id')
-        if request.method =='POST':
-            comment_form=CommentForm(request.POST or None)
-            if comment_form.is_valid():
-                content=request.POST.get('content')
-                comments=Comment.objects.create(post=coursee_id,user=request.user,content=content)
-                comments.save()
-                return HttpResponseRedirect(coursee_id.get_absolute_url())
-        else:
-                comment_form=CommentForm
+
 
         context={
                   "qa" :post,
-                'comment': comment,
+                # 'comment': comment,
                 # 'new_comment': new_comment,
-                'comment_form': comment_form
+                # 'comment_form': comment_form
 
             }
         # if next:
@@ -63,9 +56,12 @@ def course(request,coursee_id):
 
 
 
+# for Lecures handling of each course
 
+def lectures(request, id):
+    data=Lecture.objects.filter(course=(home_course.objects.get(id=id)).id)
 
-
+    return render(request,'lectures/lecture.html',{'data':data})
 
 
 
@@ -130,26 +126,22 @@ def contacts(request):
 
 
 def jobforme(request):
-    if request.method=='POST':
-        name = request.POST['full_name']
-        email = request.POST['email']
-        image = request.POST['file_cv']
-        message = request.POST['message']
-        if jobform.objects.filter(email=email).exists():
-            messages.error(request, 'This Email is already have applied,Please wait for admin approve your request! ')
+    if request.method == 'POST':
+        form = vacancyForm(request.POST , request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Applied Successfully : ')
             return redirect('jobform')
-        else:
-            h=jobform(name=name,email=email,message=message,image=image)
-            h.save()
-            messages.success(request,'Applied Successfully')
 
-            return redirect('jobform')
+
+
+
+
+
     else:
-        return render(request,'pages/jobform.html')
 
-# def hello(request):
-#     return render(request,'pages/jobform.html')
-
+        form=vacancyForm(request.POST)
+    return render(request,'pages/jobform.html',{'form':form})
 
 
 
@@ -167,6 +159,5 @@ def courses(request):
 
 
 
-@login_required(login_url='accounts/h')
-def enrollment(request):
-    return render(request,'cart/cart.html')
+# @login_required(login_url='accounts/h')
+
